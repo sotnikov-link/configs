@@ -11,24 +11,37 @@
     Plugin 'vim-airline/vim-airline'
       Plugin 'vim-airline/vim-airline-themes'
     Plugin 'ctrlpvim/ctrlp.vim'
-    Plugin 'rodnaph/vim-color-schemes'
+    Plugin 'altercation/vim-colors-solarized'
+    Plugin 'nathanaelkane/vim-indent-guides'
 
-    " Disable
-    " Plugin 'vim-syntastic/syntastic'
+    " Disabled
+      " Plugin 'vim-syntastic/syntastic'
+      " Plugin 'rodnaph/vim-color-schemes'
 
   " required block for Vundle
     call vundle#end()
     filetype plugin indent on
 
 " Settings for Plugins
+  " Plugin 'nathanaelkane/vim-indent-guides'
+    let g:indent_guides_enable_on_vim_startup = 1
+    let g:indent_guides_auto_colors = 1
+    let g:indent_guides_guide_size = 1
+    " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
+    " autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
+
   " Plugin 'vim-airline/vim-airline'
     let g:airline#extensions#tabline#enabled = 1
+
   " Plugin 'vim-airline/vim-airline-themes'
     let g:airline_theme='simple'
-  " Plugin 'rodnaph/vim-color-schemes'
+
+  " Plugin 'altercation/vim-colors-solarized'
     syntax enable
     set background=dark
-    colorscheme darktango
+    colorscheme solarized
+    " let g:solarized_termcolors=256
+
   " Plugin 'ctrlpvim/ctrlp.vim'
     set runtimepath^=~/.vim/bundle/ctrlp.vim
 
@@ -42,7 +55,7 @@
   " Number of column to be highlighted
   " Only available when compiled with the +syntax feature
     set colorcolumn=80
-    highlight ColorColumn ctermbg=8
+    highlight ColorColumn ctermbg=0
 
     " if version >= 703
     "   set colorcolumn=80
