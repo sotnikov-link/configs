@@ -12,45 +12,54 @@
       Plugin 'vim-airline/vim-airline-themes'
     Plugin 'ctrlpvim/ctrlp.vim'
     Plugin 'altercation/vim-colors-solarized'
-    Plugin 'nathanaelkane/vim-indent-guides'
+    Plugin 'tweekmonster/local-indent.vim'
 
-    " Disabled
-      " Plugin 'vim-syntastic/syntastic'
-      " Plugin 'rodnaph/vim-color-schemes'
+  " Disabled My Plugins
+    " Plugin 'nathanaelkane/vim-indent-guides'
+    " Plugin 'vim-syntastic/syntastic'
+    " Plugin 'rodnaph/vim-color-schemes'
 
   " required block for Vundle
     call vundle#end()
     filetype plugin indent on
 
 " Settings for Plugins
-  " Plugin 'nathanaelkane/vim-indent-guides'
-    let g:indent_guides_enable_on_vim_startup = 1
-    let g:indent_guides_auto_colors = 1
-    let g:indent_guides_guide_size = 1
-    " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
-    " autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
-
-  " Plugin 'vim-airline/vim-airline'
-    let g:airline#extensions#tabline#enabled = 1
-
-  " Plugin 'vim-airline/vim-airline-themes'
-    let g:airline_theme='simple'
-
   " Plugin 'altercation/vim-colors-solarized'
     syntax enable
     set background=dark
     colorscheme solarized
     " let g:solarized_termcolors=256
 
+  " Plugin 'tweekmonster/local-indent.vim'
+    autocmd FileType * LocalIndentGuide +hl -cc
+    hi LocalIndentGuide ctermfg=23 ctermbg=0 cterm=inverse
+
+  " Plugin 'vim-airline/vim-airline'
+    let g:airline#extensions#tabline#enabled = 1
+    set laststatus=2
+
+  " Plugin 'vim-airline/vim-airline-themes'
+    let g:airline_theme='simple'
+
   " Plugin 'ctrlpvim/ctrlp.vim'
     set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 " Interface
-  " fold based on the indentation
+  " Folding
+    function! NeatFoldText()
+      let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+      let lines_count = v:foldend - v:foldstart + 1
+      let lines_count_text = '/ ' . printf("%10s", lines_count . ' lines') . ' /'
+      " let foldchar = matchstr(&fillchars, 'fold:\zs.')
+      let foldchar = ' '
+      let foldtextstart = strpart('+' . repeat(' ', v:foldlevel*2-2) . line, 0, (winwidth(0)*2)/3)
+      let foldtextend = lines_count_text . repeat(foldchar, 8)
+      let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+      return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+    endfunction
+    set foldtext=NeatFoldText()
     set foldmethod=indent
-
-  " Syntax On
-    syntax on
+    hi Folded cterm=underline term=underline ctermbg=NONE ctermfg=238
 
   " Number of column to be highlighted
   " Only available when compiled with the +syntax feature
