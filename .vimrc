@@ -13,6 +13,11 @@
     Plugin 'ctrlpvim/ctrlp.vim'
     Plugin 'altercation/vim-colors-solarized'
     Plugin 'tweekmonster/local-indent.vim'
+    Plugin 'xolox/vim-session'
+      Plugin 'xolox/vim-misc'
+    Plugin 'xolox/vim-notes'
+    Plugin 'sjl/gundo.vim'
+    Plugin 'vim-syntastic/syntastic'
 
   " Disabled My Plugins
     " Plugin 'nathanaelkane/vim-indent-guides'
@@ -24,47 +29,76 @@
     filetype plugin indent on
 
 " Settings for Plugins
+  " Plugin 'xolox/vim-notes'
+    let g:notes_directories = ['~/Notes']
+    let g:notes_suffix = '.md'
+    let g:notes_title_sync = 'no'
+
+  " Plugin 'vim-syntastic/syntastic'
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
+
   " Plugin 'altercation/vim-colors-solarized'
     syntax enable
-    set background=dark
+    set background=light
     colorscheme solarized
-    " let g:solarized_termcolors=256
+    let g:solarized_termcolors=256
 
   " Plugin 'tweekmonster/local-indent.vim'
     autocmd FileType * LocalIndentGuide +hl -cc
-    hi LocalIndentGuide ctermfg=23 ctermbg=0 cterm=inverse
+    hi LocalIndentGuide ctermfg=6 ctermbg=0 cterm=inverse
 
   " Plugin 'vim-airline/vim-airline'
+    let g:airline_powerline_fonts = 1
     let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#tab_min_count = 0
+    let g:airline#extensions#tabline#formatter = 'unique_tail'
+    " let g:airline#extensions#tabline#show_buffers = 0
+    let g:airline#extensions#tabline#fnamemod = ':t'
+    let g:airline#extensions#tabline#show_close_button = 0
+    let g:airline#extensions#tabline#show_tab_nr = 1
     set laststatus=2
 
   " Plugin 'vim-airline/vim-airline-themes'
-    let g:airline_theme='simple'
+    let g:airline_theme='solarized'
 
   " Plugin 'ctrlpvim/ctrlp.vim'
     set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 " Interface
+  " Relative number — numbers of strings
+    set rnu
+
   " Folding
     function! NeatFoldText()
-      let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+      let line = ' ' . substitute(
+            \ getline(v:foldstart),
+            \ '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g'
+            \ ) . ' '
       let lines_count = v:foldend - v:foldstart + 1
-      let lines_count_text = '/ ' . printf("%10s", lines_count . ' lines') . ' /'
+      let lines_count_text = '/ '
+            \ . printf("%10s", lines_count . ' lines') . ' /'
       " let foldchar = matchstr(&fillchars, 'fold:\zs.')
       let foldchar = ' '
-      let foldtextstart = strpart('+' . repeat(' ', v:foldlevel*2-2) . line, 0, (winwidth(0)*2)/3)
+      let foldtextstart = strpart(
+            \ '+' . repeat(' ', v:foldlevel*2-2) . line, 0, (winwidth(0)*2)/3)
       let foldtextend = lines_count_text . repeat(foldchar, 8)
-      let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-      return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+      let foldtextlength = strlen(
+            \ substitute(foldtextstart . foldtextend, '.', 'x', 'g')
+            \ ) + &foldcolumn
+      return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength)
+            \ . foldtextend
     endfunction
     set foldtext=NeatFoldText()
     set foldmethod=indent
-    hi Folded cterm=underline term=underline ctermbg=NONE ctermfg=238
+    hi Folded cterm=underline term=underline ctermbg=NONE ctermfg=14
 
   " Number of column to be highlighted
   " Only available when compiled with the +syntax feature
     set colorcolumn=80
-    highlight ColorColumn ctermbg=0
+    " highlight ColorColumn ctermbg=0
 
     " if version >= 703
     "   set colorcolumn=80
@@ -100,9 +134,9 @@
   " Display invisible characters
     set list
     if version >= 700
-        set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:×
+      set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:_
     else
-        set listchars=tab:»\ ,trail:·,extends:>,precedes:<,nbsp:_
+      set listchars=tab:»\ ,trail:·,extends:>,precedes:<,nbsp:_
     endif
 
   " Copy indent from current line when starting a new line
