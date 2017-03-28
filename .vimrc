@@ -1,4 +1,4 @@
-" Vundle
+" Plugins
   " required block for Vundle
     set nocompatible
     filetype off
@@ -13,33 +13,14 @@
     Plugin 'ctrlpvim/ctrlp.vim'
     Plugin 'altercation/vim-colors-solarized'
     Plugin 'tweekmonster/local-indent.vim'
-    Plugin 'xolox/vim-session'
-      Plugin 'xolox/vim-misc'
-    Plugin 'xolox/vim-notes'
     Plugin 'sjl/gundo.vim'
-    Plugin 'vim-syntastic/syntastic'
-
-  " Disabled My Plugins
-    " Plugin 'nathanaelkane/vim-indent-guides'
-    " Plugin 'vim-syntastic/syntastic'
-    " Plugin 'rodnaph/vim-color-schemes'
+    Plugin 'airblade/vim-gitgutter'
 
   " required block for Vundle
     call vundle#end()
     filetype plugin indent on
 
 " Settings for Plugins
-  " Plugin 'xolox/vim-notes'
-    let g:notes_directories = ['~/Notes']
-    let g:notes_suffix = '.md'
-    let g:notes_title_sync = 'no'
-
-  " Plugin 'vim-syntastic/syntastic'
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_check_on_open = 1
-    let g:syntastic_check_on_wq = 0
-
   " Plugin 'altercation/vim-colors-solarized'
     syntax enable
     set background=light
@@ -48,14 +29,14 @@
 
   " Plugin 'tweekmonster/local-indent.vim'
     autocmd FileType * LocalIndentGuide +hl -cc
-    hi LocalIndentGuide ctermfg=6 ctermbg=0 cterm=inverse
+    hi LocalIndentGuide ctermfg=255 ctermbg=7 cterm=inverse
 
   " Plugin 'vim-airline/vim-airline'
     let g:airline_powerline_fonts = 1
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#tab_min_count = 0
     let g:airline#extensions#tabline#formatter = 'unique_tail'
-    " let g:airline#extensions#tabline#show_buffers = 0
+    let g:airline#extensions#tabline#show_buffers = 1
     let g:airline#extensions#tabline#fnamemod = ':t'
     let g:airline#extensions#tabline#show_close_button = 0
     let g:airline#extensions#tabline#show_tab_nr = 1
@@ -68,6 +49,9 @@
     set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 " Interface
+  " Current line
+    hi CursorLineNr ctermbg=7
+
   " Relative number — numbers of strings
     set rnu
 
@@ -93,16 +77,12 @@
     endfunction
     set foldtext=NeatFoldText()
     set foldmethod=indent
-    hi Folded cterm=underline term=underline ctermbg=NONE ctermfg=14
+    hi Folded ctermbg=230 cterm=NONE term=NONE ctermfg=14
 
   " Number of column to be highlighted
   " Only available when compiled with the +syntax feature
     set colorcolumn=80
-    " highlight ColorColumn ctermbg=0
 
-    " if version >= 703
-    "   set colorcolumn=80
-    " end
 
   " Copy indent from current line when starting a new line
     set autoindent
@@ -133,11 +113,7 @@
   " set showtabline=2
   " Display invisible characters
     set list
-    if version >= 700
-      set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:_
-    else
-      set listchars=tab:»\ ,trail:·,extends:>,precedes:<,nbsp:_
-    endif
+    set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮,nbsp:_
 
   " Copy indent from current line when starting a new line
     set autoindent
@@ -158,6 +134,9 @@
   " Number of spaces that a tab counts for while performing editing operations
     set softtabstop=2
 
+  " No wrap
+    set nowrap
+
   " Search
     " While typing a search command, show pattern matches as it is typed
     " Only available when compiled with the +extra_search feature
@@ -177,8 +156,6 @@
     " All matches in a line are substituted instead of one
       set gdefault
 
-    " No wrap
-      set nowrap
 
 " Keymap
   " Clear the search highlight in Normal mode
