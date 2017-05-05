@@ -28,7 +28,7 @@
     let g:solarized_termcolors=256
 
   " Plugin 'tweekmonster/local-indent.vim'
-    autocmd FileType * LocalIndentGuide +hl -cc
+    autocmd FileType *.html,*.css,*.js,*.md,*.txt LocalIndentGuide +hl -cc
     hi LocalIndentGuide ctermfg=255 ctermbg=7 cterm=inverse
 
   " Plugin 'vim-airline/vim-airline'
@@ -77,6 +77,7 @@
     endfunction
     set foldtext=NeatFoldText()
     set foldmethod=indent
+    set foldlevelstart=5
     hi Folded ctermbg=230 cterm=NONE term=NONE ctermfg=14
 
   " Number of column to be highlighted
