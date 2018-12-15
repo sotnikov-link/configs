@@ -1,7 +1,7 @@
 # Alilases
 alias ll='ls -la'
 alias gdiff='git diff --no-index'
-
+alias git='LANG=en_US.UTF-8 git'
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
