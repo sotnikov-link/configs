@@ -3,6 +3,11 @@ alias ll='ls -la'
 alias gdiff='git diff --no-index'
 alias git='LANG=en_US.UTF-8 git'
 
+
+# Tmux
+tmux bind c new-window -c "#{pane_current_path}"
+
+
 # NVM
 export NVM_DIR="$HOME/.nvm"
 . "$(brew --prefix nvm)/nvm.sh"
