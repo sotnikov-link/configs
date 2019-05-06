@@ -51,17 +51,17 @@ brew install git
 # Установка Docker
 brew cask install docker
 
+# Установка NVM N
+curl -L https://git.io/n-install | bash
+
 # Установка Node.js
-brew install node
+n lts
 
 # Установка Yarn
-brew install yarn
+npm i -g yarn
 
 # Установка подсказок для Yarn
 brew install yarn-completion
-
-# Установка NVM N
-npm i -g n
 ```
 
 ## Насройка Git репозитория
