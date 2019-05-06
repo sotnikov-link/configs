@@ -1,6 +1,6 @@
 # Настройка MacOS через терминал
 
-```bash
+```sh
 # Удалить из Dock все закрепленные приложения
 defaults write com.apple.dock persistent-apps -array
 
@@ -64,18 +64,37 @@ npm i -g yarn
 brew install yarn-completion
 ```
 
+## Обновление bash
+
+По статье [Upgrading Bash on macOS (itnext.io)](https://itnext.io/upgrading-bash-on-macos-7138bd1066ba)
+
+```sh
+# Установка новой версии bash через brew
+brew install bash
+
+# Разрешить использовать новую оболочку по умолчанию для пользователей
+sudo vim /etc/shells
+# В конец файла добавить строку: «/usr/local/bin/bash»
+
+# Сменить оболочку для текущего пользователя
+chsh -s /usr/local/bin/bash
+
+# Сменить оболочку для пользователя root
+sudo chsh -s /usr/local/bin/bash
+```
+
 ## Насройка Git репозитория
 
 Основано на https://gist.github.com/bartoszmajsak/1396344
 
-```bash
+```sh
 cp .git/hooks/prepare-commit-msg.sample .git/hooks/prepare-commit-msg
 vi .git/hooks/prepare-commit-msg
 ```
 
 Содержимое для файла `.git/hooks/prepare-commit-msg`
 
-```bash
+```sh
 #!/bin/bash
 
 # This way you can customize which branches should be skipped when
