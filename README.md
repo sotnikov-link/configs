@@ -85,8 +85,6 @@ sudo chsh -s /usr/local/bin/bash
 
 ## Насройка Git репозитория
 
-Основано на https://gist.github.com/bartoszmajsak/1396344
-
 ```sh
 cp .git/hooks/prepare-commit-msg.sample .git/hooks/prepare-commit-msg
 vi .git/hooks/prepare-commit-msg
@@ -95,21 +93,20 @@ vi .git/hooks/prepare-commit-msg
 Содержимое для файла `.git/hooks/prepare-commit-msg`
 
 ```sh
-#!/bin/bash
+#!/bin/sh
 
-# This way you can customize which branches should be skipped when
-# prepending commit message.
-if [ -z "$BRANCHES_TO_SKIP" ]; then
-  BRANCHES_TO_SKIP=(master develop test)
-fi
+# Automatically adds branch name and branch description to every commit message.
 
-BRANCH_NAME=$(git symbolic-ref --short HEAD)
-BRANCH_NAME="${BRANCH_NAME##*/}"
+NAME=$(git branch | grep '*' | sed 's/* //')
+DESCRIPTION=$(git config branch."$NAME".description)
 
-BRANCH_EXCLUDED=$(printf "%s\n" "${BRANCHES_TO_SKIP[@]}" | grep -c "^$BRANCH_NAME$")
-BRANCH_IN_COMMIT=$(grep -c "\[$BRANCH_NAME\]" $1)
-
-if [ -n "$BRANCH_NAME" ] && ! [[ $BRANCH_EXCLUDED -eq 1 ]] && ! [[ $BRANCH_IN_COMMIT -ge 1 ]]; then
-  sed -i.bak -e "1s/^/[$BRANCH_NAME] /" $1
+echo '['"$NAME"'] '$(cat "$1") > "$1"
+if [ -n "$DESCRIPTION" ]
+then
+   echo "" >> "$1"
+   echo $DESCRIPTION >> "$1"
 fi
 ```
+
+* https://stackoverflow.com/a/11524807
+* https://gist.github.com/bartoszmajsak/1396344
