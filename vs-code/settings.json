@@ -1,0 +1,30 @@
+{
+  "files.defaultLanguage": "typescriptreact",
+  "workbench.startupEditor": "none",
+  "prettier.singleQuote": true,
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "breadcrumbs.enabled": true,
+  "files.trimFinalNewlines": true,
+  "files.insertFinalNewline": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "window.zoomLevel": 0,
+  "workbench.colorTheme": "Default Light+",
+  "editor.minimap.enabled": false,
+  "editor.rulers": [80, 120],
+  "files.trimTrailingWhitespace": true,
+  "git.inputValidationSubjectLength": 72,
+  "extensions.ignoreRecommendations": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.exclude": {
+    "**/node_modules": true
+  }
+}
