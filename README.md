@@ -95,22 +95,33 @@ vi .git/hooks/prepare-commit-msg
 ```sh
 #!/bin/sh
 
-# Automatically adds branch name and branch description to every commit message
+#
+# Automatically add branch name and branch description to every commit message
+# except merge commit
+#
 
-if [ "$2" = "merge" -a -f .git/MERGE_MSG ]; then
-    NAME=$(git branch | grep '*' | sed 's/* //')
-    DESCRIPTION=$(git config branch."$NAME".description)
+COMMIT_EDITMSG=$1
 
-    echo '['"$NAME"'] '$(cat "$1") > "$1"
-    if [ -n "$DESCRIPTION" ]
-    then
-      echo "" >> "$1"
-      echo $DESCRIPTION >> "$1"
-    fi
+addBranchName() {
+  NAME=$(git branch | grep '*' | sed 's/* //')
+  DESCRIPTION=$(git config branch."$NAME".description)
+  echo "[$NAME] $(cat $COMMIT_EDITMSG)" > $COMMIT_EDITMSG
+  if [ -n "$DESCRIPTION" ]
+  then
+     echo "" >> $COMMIT_EDITMSG
+     echo $DESCRIPTION >> $COMMIT_EDITMSG
+  fi
+}
+
+MERGE=$(cat $COMMIT_EDITMSG|grep '^Merge branch'|wc -l)
+
+if [ $MERGE -eq 0 ] ; then
+  addBranchName
 fi
 
 ```
 
+* https://stackoverflow.com/a/18739064
 * https://stackoverflow.com/a/11524807
 * https://stackoverflow.com/a/24692818
 * https://gist.github.com/bartoszmajsak/1396344
