@@ -64,6 +64,15 @@ npm i -g yarn
 brew install yarn-completion
 ```
 
+## Настройка tmux
+
+```sh
+cd
+git clone https://github.com/gpakosz/.tmux.git
+ln -s -f .tmux/.tmux.conf
+cp .tmux/.tmux.conf.local .
+```
+
 ## Обновление bash
 
 По статье [Upgrading Bash on macOS (itnext.io)](https://itnext.io/upgrading-bash-on-macos-7138bd1066ba)
