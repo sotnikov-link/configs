@@ -25,36 +25,36 @@
 
 ```sh
 # Удалить из Dock все закрепленные приложения
-defaults write com.apple.dock persistent-apps -array && killall Dock
+defaults write "com.apple.dock" "persistent-apps" -array; killall Dock
 
 # Не показывать в Dock недавние программы
 # https://macos-defaults.com/dock/show-recents.html#set-to-false
-defaults write com.apple.dock show-recents -bool no && killall Dock
+defaults write "com.apple.dock" "show-recents" -bool no; killall Dock
 
 # Автоматически скрывать Dock
-defaults write com.apple.dock autohide -int 1 && killall Dock
+defaults write "com.apple.dock" "autohide" -int 1; killall Dock
 
 # Умеренный размер значков в Dock
 # https://macos-defaults.com/dock/tilesize.html#set-to-48-default-value
-defaults write com.apple.dock "tilesize" -int "48" && killall Dock
+defaults write "com.apple.dock" "tilesize" -int "48"; killall Dock
 
 # Быстрое сворачивание и разворачивание окон
 # https://macos-defaults.com/dock/mineffect.html#set-to-scale
-defaults write com.apple.dock "mineffect" -string "scale" && killall Dock
+defaults write "com.apple.dock" "mineffect" -string "scale"; killall Dock
 
 # Не менять расположение пространств (рабочих столов, spaces) в зависимости от недавнего использования
-defaults write com.apple.dock "mru-spaces" -bool "false" && killall Dock
+defaults write "com.apple.dock" "mru-spaces" -bool "false"; killall Dock
 ```
 
 ### Finder
 
 ```sh
 # Показывать расширения файлов в Finder
-defaults write NSGlobalDomain "AppleShowAllExtensions" -bool "true" && killall Finder
+defaults write "NSGlobalDomain" "AppleShowAllExtensions" -bool "true"; killall Finder
 
 # Показывать скрытые файлы в Finder
 # https://macos-defaults.com/finder/AppleShowAllFiles.html#set-to-true
-defaults write com.apple.Finder "AppleShowAllFiles" -bool "true" && killall Finder
+defaults write "com.apple.Finder" "AppleShowAllFiles" -bool "true"; killall Finder
 ```
 
 > todo: табличное представление
